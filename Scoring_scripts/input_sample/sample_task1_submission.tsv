@@ -1,0 +1,6 @@
+Response_ID	Annotation_ID	Segment_Type	Span_Start	Span_End
+R000001	1	Ayah	120	168
+R000001	2	isnad	270	304
+R000001	2	matn	305	540
+R000001	2	claimed_source	542	560
+R000002	1	NoAnnotation	-	-

@@ -19,11 +19,17 @@ IslamicEval 2026 - Task 4 (Labelling) scorer.
 Prediction TSV columns (tab-separated, WITH header):
     question_id   Response_ID   Annotation_ID   span_type   span_text   relevance_label
 
-Label must be only "correct" or "incorrect".
-Note (deviation from 2025): predictions carry id columns and are matched by
-(Response_ID, Annotation_ID, Segment_Type), NOT by row order, because each
-citation has multiple segments and positional matching would misalign.
-Rows where the GOLD label is "N/A" are excluded from scoring.
+Given a user question and an LLM response with its correctly extracted Qur'anic and Hadith citation spans, 
+the task is to determine whether each citation span is relevant to answering the question. 
+The question_id, Response_ID, and Annotation_ID fields link to the main JSONL file, which contains the 
+full text of the user's question and the LLM's response.
+span_type identifies the citation as either an Ayah or a matn.
+span_text provides the correct text of the citation.
+The task is to predict the relevance_label for each span using a binary classification:
+ Relevant (1) or Non-relevant (0). 
+
+Refer to the detailed relevance label definitions published at Subtask 4 webpage https://sites.google.com/view/islamiceval2026/subtask-4
+
 '''
 
 

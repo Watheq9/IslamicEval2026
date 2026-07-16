@@ -29,10 +29,12 @@ Reported scores:
   - accuracy_matn  : accuracy on Hadith rows only.
 '''
 
-ROOT_DIR = os.environ.get('SCORING_ROOT', '/app/')
-reference_dir = os.path.join(ROOT_DIR, 'input', 'ref')
-prediction_dir = os.path.join(ROOT_DIR, 'input', 'res')
-score_dir = os.path.join(ROOT_DIR, 'output')
+# ROOT_DIR = os.getcwd()
+ROOT_DIR = '/app/'
+reference_dir = os.path.join(ROOT_DIR, 'input/', 'ref')
+prediction_dir = os.path.join(ROOT_DIR, 'input/', 'res')
+score_dir = os.path.join(ROOT_DIR, 'output/')
+
 
 SEP = ' ||| '
 _WS = re.compile(r'\s+')

@@ -18,9 +18,11 @@ citation has multiple segments and positional matching would misalign.
 Rows where the GOLD label is "N/A" are excluded from scoring.
 '''
 
-reference_dir = os.path.join('/app/input/', 'ref')
-prediction_dir = os.path.join('/app/input/', 'res')
-score_dir = '/app/output/'
+ROOT_DIR = '/app/'
+# ROOT_DIR = os.getcwd() + '/app'
+reference_dir = os.path.join(ROOT_DIR, 'input/', 'ref')
+prediction_dir = os.path.join(ROOT_DIR, 'input/', 'res')
+score_dir = os.path.join(ROOT_DIR, 'output/')
 
 print('Reading prediction')
 try:

@@ -1,0 +1,5 @@
+Response_ID	Annotation_ID	Segment_Type	Label
+R000001	1	Ayah	correct
+R000001	2	matn	incorrect
+R000001	2	isnad	correct
+R000001	2	claimed_source	correct

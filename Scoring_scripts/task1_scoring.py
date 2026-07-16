@@ -2,6 +2,12 @@ import json
 import os
 import pandas as pd
 from sklearn.metrics import f1_score
+from sys import argv
+
+import logging
+logger = logging.getLogger(__name__)
+logger.setLevel(level=logging.DEBUG)
+
 
 '''
 IslamicEval 2026 - Task 1 (Segmentation) scorer.
@@ -20,10 +26,12 @@ Spans are character offsets into generated_answer, end-exclusive.
 '''
 
 ROOT_DIR = '/app/'
+# ROOT_DIR = os.getcwd() + '/app'
 reference_dir = os.path.join(ROOT_DIR, 'input/', 'ref')
 prediction_dir = os.path.join(ROOT_DIR, 'input/', 'res')
 score_dir = os.path.join(ROOT_DIR, 'output/')
 
+      
 CLASSES = {'neither': 0, 'Ayah': 1, 'matn': 2, 'isnad': 3, 'claimed_source': 4}
 
 print('Reading reference')
@@ -39,6 +47,7 @@ with open(resp_file, 'r', encoding='utf-8') as f:
         if line.strip():
             rec = json.loads(line)
             qid_response_mapping[rec['id']] = rec['generated_answer']
+    print(f'Reference file was loaded with {len(qid_response_mapping)} entries')
 
 try:
     ref_file = os.path.join(reference_dir,
@@ -46,6 +55,8 @@ try:
 except IndexError:
     raise FileNotFoundError('No reference file found in the reference directory. Contact the organizers if you see this error.')
 ref_data = pd.read_csv(ref_file, sep='\t', dtype=str, keep_default_na=False)
+
+print(f"Reference .tsv file was loaded with {len(ref_data)} entries")
 
 print('Reading prediction')
 try:
@@ -61,7 +72,7 @@ pred_data = pd.read_csv(os.path.join(prediction_dir, pred_file), sep='\t', dtype
 allowed = set(CLASSES.keys()) | {'NoAnnotation'}
 if any(t not in allowed for t in pred_data['Segment_Type'].values):
     raise ValueError('Prediction file "Segment_Type" column must contain only '
-                     'Ayah, matn, isnad, claimed_source, or NoAnnotation.')
+                    'Ayah, matn, isnad, claimed_source, or NoAnnotation.')
 
 def paint(rows, L):
     arr = [0] * L
@@ -83,7 +94,7 @@ for rid, text in qid_response_mapping.items():
     p_all.extend(paint(pred_data[pred_data['Response_ID'] == rid], L))
 
 labels = list(CLASSES.values())
-f1_score_value = f1_score(g_all, p_all, average='macro', labels=labels, zero_division=0)
+f1_score_value = round(f1_score(g_all, p_all, average='macro', labels=labels, zero_division=0), 4)
 print(f'F1 Score: {f1_score_value}')
 
 scores = {'F1 Score': f1_score_value}
