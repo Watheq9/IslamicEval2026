@@ -1,4 +1,4 @@
-question_id	response_id	annotation_id	span_type	span_text	relevance_label
+question_id	Response_ID	Annotation_ID	span_type	span_text	relevance_label
 Q00001-fa	R0040	3	matn	كلُّ مُسْكِرٍ خَمْرٌ، وكلُّ خَمْرٍ حَرَامٌ	1
 Q00005-fa	R0041	1	Ayah	ولقد كرمنا بني آدم وحملناهم في البر والبحر ورزقناهم من الطيبات وفضلناهم على كثير ممن خلقنا تفضيلا	1
 Q00005-fa	R0041	2	matn	لا ضرر ولا ضرار	1
