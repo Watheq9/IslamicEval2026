@@ -120,9 +120,11 @@ Q07863	R000017	2	matn	إنما بعثت لأتمم مكارم الأخلاق	1
 
 ## Using the Evaluation Scripts of Subtasks 1, 2, 3 and 4
 
-One script per subtask — task1_scoring.py, task2_scoring.py, task3_scoring.py — all run the same way.
+One script per subtask — task1_scoring.py, task2_scoring.py, task3_scoring.py, task4_scoring.py — all run the same way.
 
-### Setup (Option 1)
+### Method 1 
+
+#### Setup 
 
 Open the script and set ROOT_DIR at the top to a folder on your machine (or set the SCORING_ROOT environment variable to it). Inside that folder, create three subfolders:
 
@@ -137,7 +139,6 @@ input/res/ : your prediction .tsv for that subtask (columns as in the Submission
 input/ref/ : the gold answer TSV for that subtask (a single .tsv file, any name). For Subtask 1 only, also place the response file (the .jsonl with id and generated_answer) in this same folder, because the script needs it to measure each response's length. Subtasks 2 and 3 need only the gold TSV.
 
 
-
 #### Running
 
 ```bash
@@ -149,14 +150,20 @@ input/ref/ : the gold answer TSV for that subtask (a single .tsv file, any name)
 
 Each script prints the score and writes it to output/scores.json.
 
-#### Method 2
-Instead of putting pred and gold files in the structure described in option 1. You can put them at any directory and pass the path to them in the argumens. For example, for task 1:
+### Method 2
+Instead of putting pred and gold files in the structure described in the setup of Method 1. You can put them at any directory and pass the path to them in the argumens. For example, for task 1:
 
+#### Running the scoring script for Subtask 1 
 ```bash
     python task1_scoring.py --pred my_preds.tsv --ref gold.tsv --responses responses.jsonl --output ./out
         (uses explicit files/dirs instead)
 ```
 
+#### Running the scoring scripts for Subtasks 2, 3 and 4 
+```bash
+    python task2_scoring.py --pred my_preds.tsv --ref gold.tsv --output ./out
+        (uses explicit files/dirs instead)
+```
 
 ### Output
 
@@ -164,7 +171,6 @@ Instead of putting pred and gold files in the structure described in option 1. Y
 - Subtask 2: {"accuracy": macro, "accuracy_matn": ..., "accuracy_Ayah": ..., "accuracy_isnad": ..., "accuracy_claimed_source": ...} — accuracy per segment type, gold-N/A excluded, macro-averaged.
 - Subtask 3: {"accuracy": ..., "accuracy_Ayah": ..., "accuracy_matn": ...} — overall accuracy across all scored segments, plus per-type accuracy for Qur'an (Ayah) and Hadith (matn).
 - Subtask 4: {"Macro-averaged F1": macro-averaged F1 across questions,
-            "num_no_relevant_questions": count of questions with no relevant gold spans, 
             "per_question_score":dict keyed by question_id, each value holding
                                   that question's Response_ID(s), span_count,
                                   tp/fp/fn/tn, precision, recall, and F1 Score}

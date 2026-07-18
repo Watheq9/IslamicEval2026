@@ -17,7 +17,7 @@ IslamicEval 2026 - Task 4 (Labelling) scorer.
 2- Place your prediction TSV in {res} directory (or pass --pred)
 
 Prediction TSV columns (tab-separated, WITH header):
-    question_id   Response_ID   Annotation_ID   span_type   span_text   relevance_label
+    question_id   response_id   Annotation_ID   span_type   span_text   relevance_label
 
 Given a user question and an LLM response with its correctly extracted Qur'anic and Hadith citation spans,
 the task is to determine whether each citation span is relevant to answering the question.
@@ -32,7 +32,6 @@ Refer to the detailed relevance label definitions published at Subtask 4 webpage
 
 Output: a single scores.json with three top-level keys:
     "Macro-averaged F1"        : float, the macro-averaged F1 across questions
-    "num_no_relevant_questions": int, count of questions with no relevant gold spans
     "per_question_score"       : dict keyed by question_id, each value holding
                                   that question's Response_ID(s), span_count,
                                   tp/fp/fn/tn, precision, recall, and F1 Score
@@ -136,14 +135,12 @@ def save_scores(macro_f1, no_relevant_count, rows, out_dir):
     }
     scores = {
         "Macro-averaged F1": round(macro_f1, 6),
-        "num_no_relevant_questions": no_relevant_count,
         "per_question_score": per_question_score,
     }
     scores_path = out_dir / "scores.json"
     with scores_path.open("w", encoding="utf-8") as handle:
         handle.write(json.dumps(scores, indent=2))
     return scores_path
-
 
 def resolve_tsv_path(path, label):
     """Accept either a direct file path or a directory containing a single
@@ -206,8 +203,6 @@ def main(argv=None):
 
     if args.verbose:
         print(f"Macro-averaged F1: {macro_f1:.6f}")
-        if no_relevant_count:
-            print(f"{no_relevant_count} question(s) had no relevant gold spans.")
         print(f"Saved scores to: {scores_path}")
     else:
         print('Submission processed and scored successfully.')
