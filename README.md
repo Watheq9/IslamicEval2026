@@ -1,6 +1,7 @@
 # IslamicEval 2026
 
-This repository contains the **dataset**, **corpora**, and **evaluation scripts** for **IslamicEval 2026** — a shared task on detecting and correcting hallucinated Qur'anic and Hadith citations in LLM-generated Arabic answers to Islamic questions.
+This repository contains the **dataset**, **corpora**, and **evaluation scripts** for [**IslamicEval 2026** — a shared task on Fine-grained Hallucination Detection
+in Arabic Islamic Content](https://sites.google.com/view/islamiceval2026/). The shared task consists of four subtasks for detecting, verifying, correcting, and assessing the relevance of Qur'anic and Hadith citations in LLM-generated Arabic responses to Islamic questions.
 
 Responses are drawn from real user questions (sourced from Fanar logs) answered by large language models. Each response may cite Qur'anic verses (Ayah) or Prophetic sayings (Hadith), and every citation has been manually annotated at a fine-grained level: is the quoted text authentic, is the chain of narration (isnad) correct, is the claimed source accurate, and — if something is wrong — what is the correct citation?
 
