@@ -42,6 +42,28 @@ IslamicEval2026/
 
 See **[DATASET_README.md](./DATASET_README.md)** for the complete dataset description and submission file formats, and **[CODEBOOK.md](./CODEBOOK.md)** for the exact JSON schema of every field in `train.jsonl` / `dev.jsonl`.
 
+## Test set
+
+The blind **test set** (`test_set/`) uses the same schema, subtasks, and scoring as `dev_set/`,
+with a few differences:
+
+- **No gold labels.** Segment labels, corrections, and relevance labels are withheld — you submit
+  predictions per subtask and are scored on Codabench.
+- **Per-subtask split.** Each citation (and each response) is assigned to exactly **one** subtask,
+  so the same annotation never appears in more than one subtask. Instead of a single fully-annotated
+  `test.jsonl`, the inputs are provided per subtask:
+  - **Subtask 1** — a span-detection input JSONL of responses (`id`, `question_id`, `question`,
+    `generated_answer`) with **no annotations**: you detect the citation spans yourself.
+  - **Subtasks 2–4** — the per-subtask input TSVs already include the citation-span text directly
+    (in the `Span` / `span_text` column) for convenience, so you can work from them without any
+    extra lookup. A shared `reference.jsonl` is also provided, giving each response plus its
+    citation-span locations (`Annotation_ID`, segment `type`, `span_start`/`span_end`) — but
+    **not** the labels or corrections — for full context.
+- **Held-out.** Test questions and responses are disjoint from `train_set/` and `dev_set/` (no
+  shared questions, answers, or IDs).
+
+Submission columns and scoring are identical to the dev phase.
+
 ## Submission format (summary)
 
 Predictions are submitted as tab-separated (TSV) files, one per subtask:
@@ -109,4 +131,11 @@ If you use this dataset or evaluation scripts in your work, please cite the Isla
 
 ## License
 
-The dataset and corpora are available for research purposes only.
+The dataset and corpora are available for **research purposes only**.
+
+> **Use warning.** This dataset documents both authentic and hallucinated (fabricated,
+> misattributed, or altered) Quranic and Hadith citations produced by language models. The
+> incorrect citations are included as examples of errors to detect, not as reliable religious
+> content. This resource is not a source of religious guidance and must not be used to
+> provide religious rulings, fatwas, or advice. Always verify Quran and Hadith against
+> authoritative scholarly sources.
