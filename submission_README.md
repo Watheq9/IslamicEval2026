@@ -11,6 +11,8 @@ Each subtask expects **one TSV file** (tab-separated, with a header row):
 | Task 3 – Correction | `*.tsv` | `Response_ID`, `Annotation_ID`, `Segment_Type`, `Correction` |
 | Task 4 – Relevance | `*.tsv` | `question_id`, `Response_ID`, `Annotation_ID`, `span_type`, `span_text`, `relevance_label` |
 
+
+
 Make sure:
 - The file is UTF-8 encoded.
 - Columns are tab-separated and match the names above exactly.
@@ -39,6 +41,6 @@ submission.zip
 4. If a submission **Fails**, check the run log for a specific error message (e.g. a missing column or invalid label) and re-submit a corrected file.
 
 ## Notes
-- You may submit multiple times during the test/devlopement phase; only your selected submission counts toward the leaderboard.
+- You may submit multiple times during the test/development phase; only your selected submission counts toward the leaderboard.
 - Scores may be hidden during certain phases — a "Finished" status confirms your file was valid and scored, even if you can't see the number yet.
-- Questions? Contact the organizers via the competition forum or email listed on the competition page.
+- Questions? Contact us via email listed on the competition page.
