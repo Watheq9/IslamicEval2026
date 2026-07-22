@@ -22,6 +22,7 @@ IslamicEval2026/
 ├── Scoring_scripts/        # Official evaluation scripts (task1_scoring.py … task4_scoring.py)
 ├── train_set/              # Training data (responses + annotations)
 ├── dev_set/                # Development / validation data
+├── submission_examples/                # Examples on dev set to follow when submitting to Codabench
 ├── CODEBOOK.md              # Field-by-field schema of the JSONL annotation format
 ├── DATASET_README.md        # Full dataset description, submission format, and scoring details
 ├── submission_README.md     # How to package and submit predictions to Codabench
@@ -52,6 +53,8 @@ Predictions are submitted as tab-separated (TSV) files, one per subtask:
 | 4 — Answer Relevance | `question_id`, `Response_ID`, `Annotation_ID`, `span_type`, `span_text`, `relevance_label` |
 
 Full column definitions, worked examples, and edge cases (e.g. no-citation responses, multiple accepted corrections) are documented in [DATASET_README.md](./DATASET_README.md). Packaging instructions for the official submission are in [submission_README.md](./submission_README.md).
+
+We provide examples on the dev set per task in "submission_examples" dir. The goal is to make it easier for you to understand what we expect from you as an input on Codabench. You can use these toy examples in the development phase to test the submission on Codabench platform.
 
 ## Running the evaluation scripts
 
