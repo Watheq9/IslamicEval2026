@@ -52,8 +52,7 @@ with a few differences:
 - **Per-subtask split.** Each citation (and each response) is assigned to exactly **one** subtask,
   so the same annotation never appears in more than one subtask. Instead of a single fully-annotated
   `test.jsonl`, the inputs are provided per subtask:
-  - **Subtask 1** — a span-detection input JSONL of responses (`id`, `question_id`, `question`,
-    `generated_answer`) with **no annotations**: you detect the citation spans yourself.
+  - **Subtask 1** — a span-detection input JSONL of responses (`id`, `question_id`, `question`, `generated_answer`) with no annotations. No span TSV is provided — locating the spans is the task. Predictions follow the same TSV convention as the dev set — refer to **[submission_examples](./submission_examples)**.
   - **Subtasks 2–4** — the per-subtask input TSVs already include the citation-span text directly
     (in the `Span` / `span_text` column) for convenience, so you can work from them without any
     extra lookup. A shared `reference.jsonl` is also provided, giving each response plus its
