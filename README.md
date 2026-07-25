@@ -53,6 +53,8 @@ with a few differences:
   so the same annotation never appears in more than one subtask. Instead of a single fully-annotated
   `test.jsonl`, the inputs are provided per subtask:
   - **Subtask 1** — a span-detection input JSONL of responses (`id`, `question_id`, `question`, `generated_answer`) with no annotations. No span TSV is provided — locating the spans is the task. Predictions follow the same TSV convention as the dev set — refer to **[submission_examples](./submission_examples)**.
+  > [!NOTE]
+  > **`Annotation_ID` in Subtask 1:** You don't need to match the gold's `Annotation_ID` — just number your citations 1, 2, 3, … as you find them. It only groups the spans of the same citation (e.g. a Hadith's `matn`, `isnad`, and `claimed_source` share one ID), and scoring is character-level, so the value itself doesn't affect the score. The column is still required in your file.
   - **Subtasks 2–4** — the per-subtask input TSVs already include the citation-span text directly
     (in the `Span` / `span_text` column) for convenience, so you can work from them without any
     extra lookup. A shared `reference.jsonl` is also provided, giving each response plus its
