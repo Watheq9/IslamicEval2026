@@ -208,11 +208,13 @@ def main():
     print('Reading reference spans (TSV)')
     ref_file = resolve_file(ref_path, '.tsv', 'Reference')
     ref_data = load_tsv(ref_file)
-    print(f'Reference spans was loaded successfully!')
+    print(f'Reference TSV file was loaded successfully!')
 
     print('Reading prediction')
     pred_file = resolve_file(pred_path, '.tsv', 'Prediction')
     pred_data = load_tsv(pred_file)
+    print(f'Prediction file was loaded successfully!')
+
 
     print('Calculating F1 Score')
     scores = score(qid_response_mapping, ref_data, pred_data, verbose=args.verbose)

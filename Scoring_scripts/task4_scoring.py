@@ -59,8 +59,10 @@ EXPECTED_COLUMNS = [
 KEY_COLUMNS = ("question_id", "Response_ID", "Annotation_ID")
 
 
-def binary_label(value):
+def binary_label(value, *, empty_as_zero=False):
     value = value.strip()
+    if value == "" and empty_as_zero:
+        return 0
     if value in {"0", "0.0"}:
         return 0
     if value in {"1", "1.0", "2", "2.0"}:
@@ -70,7 +72,7 @@ def binary_label(value):
     )
 
 
-def validate_tsv(path, *, allow_empty=False):
+def validate_tsv(path, *, allow_empty=False, empty_label_as_zero=False):
     if path.suffix.lower() != ".tsv":
         raise ValueError(f"{path}: input must have a .tsv extension")
     try:
@@ -104,7 +106,10 @@ def validate_tsv(path, *, allow_empty=False):
                 column: row[column].strip() for column in EXPECTED_COLUMNS
             }
             try:
-                record["binary_label"] = binary_label(row["relevance_label"])
+                record["binary_label"] = binary_label(
+                    row["relevance_label"],
+                    empty_as_zero=empty_label_as_zero,
+                )
             except ValueError as error:
                 raise ValueError(f"{path}:{row_number}: {error}") from error
             records.append(record)
@@ -226,10 +231,8 @@ def question_scores(pairs):
     return results, no_relevant_count
 
 
-def evaluate(gold_path, prediction_path):
+def evaluate(gold, predictions):
     """Read and score a submission without writing output files."""
-    gold = validate_tsv(gold_path)
-    predictions = validate_tsv(prediction_path, allow_empty=True)
     rows, no_relevant_count = question_scores(align_rows(gold, predictions))
     macro_f1 = sum(float(row["F1 Score"]) for row in rows) / len(rows)
     return macro_f1, no_relevant_count, rows
@@ -323,17 +326,27 @@ def main(argv=None):
     try:
         gold_file = resolve_tsv_path(gold_path, "Gold")
         pred_file = resolve_tsv_path(pred_path, "Prediction")
-        macro_f1, no_relevant_count, rows = evaluate(gold_file, pred_file)
+
+        print('Reading reference (TSV)')
+        gold = validate_tsv(gold_file)
+        print(f'Reference TSV file was loaded successfully!')
+        print('Reading predictions file (TSV)')
+        predictions = validate_tsv(pred_file, allow_empty=True, empty_label_as_zero=True)
+        print(f'Prediction file was loaded successfully!')
+        macro_f1, no_relevant_count, rows = evaluate(gold, predictions)
     except (OSError, ValueError) as error:
         raise SystemExit(f"ERROR: {error}") from error
 
     scores_path = save_scores(macro_f1, no_relevant_count, rows, out_dir)
+
     if args.verbose:
         print(f"Macro-averaged F1: {macro_f1:.6f}")
         print(f"Saved scores to: {scores_path}")
     else:
         print("Submission processed and scored successfully.")
+
     return macro_f1
+
 
 if __name__ == "__main__":
     main()
