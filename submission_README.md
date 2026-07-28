@@ -18,6 +18,13 @@ Make sure:
 - Columns are tab-separated and match the names above exactly.
 - Each `(Response_ID, Annotation_ID, Segment_Type)` (or `question_id` triple for Task 4) appears **only once**.
 
+**Naming Submitted Files**
+
+It is important to name your TSV submissions as non-generic (like submission1, or archive, etc) representative short name, since both we and you will use that name for reporting when writing the report. So, please follow the below naming format: TeamID_RunID.tsv  such that:
+- TeamID can be an alphanumeric with a length between 3 and 9 characters
+- RunID can be an alphanumeric with a length between 2 and 9 characters "
+
+
 ## 2. Zip your file
 
 Codabench requires a **`.zip` archive containing your `.tsv` file** — not the raw `.tsv` itself, and not a folder.

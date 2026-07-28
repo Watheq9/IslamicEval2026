@@ -3,3 +3,4 @@ zip_files/*
 app/*
 output/*
 .vscode/*
+.DS_Store
