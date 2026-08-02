@@ -7,8 +7,8 @@ from sklearn.metrics import f1_score
 
 '''
 IslamicEval 2026 - Task 1 (Segmentation) scorer.
-Corpus-pooled character-level macro-F1 over 5 classes:
-    neither, Ayah, matn, isnad, claimed_source
+Corpus-pooled character-level macro-F1 over 4 classes:
+   Ayah, matn, isnad, claimed_source
 
 Input files:
 1- Place the reference JSONL (responses) and the gold TSV in {ref} directory
@@ -177,7 +177,7 @@ def score(qid_response_mapping, ref_data, pred_data, verbose=False):
         g_all.extend(paint(ref_data[ref_data['Response_ID'] == rid], length, 'Reference'))
         p_all.extend(paint(pred_data[pred_data['Response_ID'] == rid], length, 'Prediction'))
 
-    labels = list(CLASSES.values())
+    labels = [v for k,v in CLASSES.items() if k != 'neither']   # = [1,2,3,4]
     f1 = round(f1_score(g_all, p_all, average='macro', labels=labels, zero_division=0), 4)
 
     scores = {'F1': f1}
