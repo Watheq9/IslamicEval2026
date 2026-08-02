@@ -198,8 +198,10 @@ def score(pred_data, ref_data, verbose=False):
             missing_total += 1
             missing_per_type[seg_type] += 1
             continue
-        pred = {normalize(p, seg_type) for p in pred_lookup[key].split(SEP) if p.strip()}
-        if gold & pred:  # any acceptable correction matched
+        pred_text = pred_lookup[key]
+        # Predictions must be a single answer
+        pred = {normalize(pred_text, seg_type)} if pred_text.strip() else set()
+        if gold & pred: 
             per_type[seg_type][0] += 1
 
     per_type_acc = {t: c / n for t, (c, n) in sorted(per_type.items()) if n > 0}
