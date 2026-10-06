@@ -127,7 +127,17 @@ https://sites.google.com/view/islamiceval2026/
 
 ## Citation
 
-If you use this dataset or evaluation scripts in your work, please cite the IslamicEval 2026 shared task (citation details to be added soon insha'Allah).
+If you use this dataset or evaluation scripts in your work, please cite the IslamicEval 2026 shared task 
+
+```bibtex
+@inproceedings{alharbi-etal-2026-islamiceval,
+  title     = {{IslamicEval} 2026: The Second Shared Task of Capturing {LLMs} Hallucination in Islamic Content},
+  author    = {Alharbi, Rahaf and Alturki, Abdulelah and Mansour, Watheq and Malhas, Rana and Mubarak, Hamdy and Darwish, Kareem and Elsayed, Tamer and Magdy, Walid},
+  booktitle = {Proceedings of the Fourth Arabic Natural Language Processing Conference (ArabicNLP 2026)},
+  year      = {2026},
+  publisher = {Association for Computational Linguistics}
+}
+```
 
 ## License
 
