@@ -125,6 +125,18 @@ The evaluation scripts are pure Python (no external dependencies beyond the stan
 Detailed task descriptions, including the Subtask 4 relevance-label guidelines, are published at:
 https://sites.google.com/view/islamiceval2026/
 
+## Post-competition evaluation
+
+The shared task has finished, but you can still score your system on the blind test set. Submit your predictions to our Hugging Face evaluator, which uses the official scoring scripts in `Scoring_scripts/`, so scores are directly
+comparable to the official IslamicEval 2026 results.
+
+👉 **[IslamicEval 2026 Test Evaluator](https://huggingface.co/spaces/RahafAwwad/IslamicEval2026-evaluator)**
+
+1. Sign in with your Hugging Face account.
+2. Choose the subtask and upload your prediction `.tsv` (or a `.zip` containing one `.tsv`),
+   in the same format as described in [submission_README.md](submission_README.md).
+3. Each user can make up to 5 scored submissions per subtask per day. Files rejected for format errors do not count.
+
 ## Citation
 
 If you use this dataset or evaluation scripts in your work, please cite the IslamicEval 2026 shared task 
@@ -141,7 +153,8 @@ If you use this dataset or evaluation scripts in your work, please cite the Isla
 
 ## License
 
-The dataset and corpora are available for **research purposes only**.
+- **Data** (questions, LLM responses, annotations and labels) is released under
+  [CC BY-NC 4.0](DATA_LICENSE) and is available for research purposes only.
 
 > **Use warning.** This dataset documents both authentic and hallucinated (fabricated,
 > misattributed, or altered) Quranic and Hadith citations produced by language models. The
