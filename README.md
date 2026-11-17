@@ -154,7 +154,7 @@ If you use this dataset or evaluation scripts in your work, please cite the Isla
 ## License
 
 - **Data** (questions, LLM responses, annotations and labels) is released under
-  [CC BY-NC 4.0](DATA_LICENSE) and is available for research purposes only.
+  [CC BY-NC 4.0](LICENSE.txt) and is available for research purposes only.
 
 > **Use warning.** This dataset documents both authentic and hallucinated (fabricated,
 > misattributed, or altered) Quranic and Hadith citations produced by language models. The
